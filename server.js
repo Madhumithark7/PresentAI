@@ -1,52 +1,18 @@
 const express = require("express");
-const cors = require("cors");
-const dotenv = require("dotenv");
-const { GoogleGenAI } = require("@google/genai");
-
-dotenv.config();
+const path = require("path");
 
 const app = express();
 
-app.use(cors());
-app.use(express.json());
+// IMPORTANT: serve frontend files
+app.use(express.static(__dirname));
 
-const ai = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY,
+// main route
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
-app.post("/generate", async (req, res) => {
-  try {
-    const { topic, audience, slidesCount } = req.body;
+const PORT = process.env.PORT || 3000;
 
-    const prompt = `
-    Create a presentation.
-
-    Topic: ${topic}
-    Audience: ${audience}
-    Number of Slides: ${slidesCount}
-
-    For each slide provide:
-    - Slide Title
-    - 3 Bullet Points
-    `;
-
-    const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
-      contents: prompt,
-    });
-
-    res.json({
-      content: response.text,
-    });
-
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      error: "Something went wrong"
-    });
-  }
-});
-
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
+app.listen(PORT, () => {
+  console.log("Server running on port " + PORT);
 });
