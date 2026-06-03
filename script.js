@@ -1,58 +1,36 @@
-async function generateSlides() {
+function generatePresentation() {
+  const output = document.getElementById("output");
 
-    let topic = document.getElementById("topic").value;
-    let audience = document.getElementById("audience").value;
-    let slidesCount = document.getElementById("slidesCount").value;
+  output.innerHTML = `
+    <div class="slides">
 
-    if (!topic || !audience || !slidesCount) {
-        alert("Please fill all fields");
-        return;
-    }
+      <h2>📊 Artificial Intelligence Presentation</h2>
 
-    document.getElementById("result").innerHTML = `
-        <div class="slide">
-            <h2>⏳ Generating Presentation...</h2>
-            <p>Please wait while AI creates your presentation.</p>
-        </div>
-    `;
+      <div class="slide">
+        <h3>Slide 1: What is AI?</h3>
+        <p>Artificial Intelligence is the simulation of human intelligence in machines.</p>
+      </div>
 
-    try {
+      <div class="slide">
+        <h3>Slide 2: How AI Works</h3>
+        <p>AI learns from data using algorithms, patterns, and training models.</p>
+      </div>
 
-        const response = await fetch(
-            "http://localhost:3000/generate",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    topic,
-                    audience,
-                    slidesCount
-                })
-            }
-        );
+      <div class="slide">
+        <h3>Slide 3: AI in Daily Life</h3>
+        <p>Used in YouTube recommendations, Google Maps, Siri, and self-driving cars.</p>
+      </div>
 
-        const data = await response.json();
+      <div class="slide">
+        <h3>Slide 4: Advantages & Challenges</h3>
+        <p>AI improves productivity but raises concerns like privacy and job changes.</p>
+      </div>
 
-        document.getElementById("result").innerHTML = `
-            <div class="slide">
-                <h2>📑 Generated Presentation</h2>
-                <div class="presentation-content">
-                    ${data.content.replace(/\n/g, "<br>")}
-                </div>
-            </div>
-        `;
+      <div class="slide">
+        <h3>Slide 5: Future of AI</h3>
+        <p>AI will transform education, healthcare, business, and everyday life.</p>
+      </div>
 
-    } catch (error) {
-
-        console.error(error);
-
-        document.getElementById("result").innerHTML = `
-            <div class="slide">
-                <h2>❌ Error</h2>
-                <p>Unable to generate presentation. Please make sure the server is running.</p>
-            </div>
-        `;
-    }
+    </div>
+  `;
 }
