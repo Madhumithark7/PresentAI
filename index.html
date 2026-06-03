@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>PresentAI</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <div class="container">
 
-    <h1 class="title">⚡ PresentAI</h1>
-    <p class="subtitle">Generate AI-style presentation instantly</p>
+    <h1>⚡ PresentAI</h1>
+    <p>Create AI-style presentations instantly</p>
 
-    <button onclick="generatePresentation()" class="btn">
-      Generate Presentation
-    </button>
+    <input type="text" id="topic" placeholder="Enter Topic (e.g. AI)" />
+    <input type="text" id="audience" placeholder="Enter Audience (e.g. Students)" />
+    <input type="number" id="slides" placeholder="Number of Slides" />
 
-    <div id="output" class="output"></div>
+    <button onclick="generatePresentation()">Generate Presentation</button>
+
+    <div id="output"></div>
 
   </div>
 

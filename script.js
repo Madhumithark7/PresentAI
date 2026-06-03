@@ -1,36 +1,33 @@
 function generatePresentation() {
+  const topic = document.getElementById("topic").value;
+  const audience = document.getElementById("audience").value;
+  const slides = document.getElementById("slides").value;
+
   const output = document.getElementById("output");
 
+  if (!topic || !audience || !slides) {
+    output.innerHTML = `<p style="color:red;">⚠ Please fill all fields</p>`;
+    return;
+  }
+
+  let slideContent = "";
+
+  for (let i = 1; i <= slides; i++) {
+    if (i == 1) {
+      slideContent += `<div class="slide">📌 Slide ${i}: Introduction to ${topic}</div>`;
+    } else if (i == slides) {
+      slideContent += `<div class="slide">📌 Slide ${i}: Thank You</div>`;
+    } else {
+      slideContent += `<div class="slide">📌 Slide ${i}: About ${topic} for ${audience}</div>`;
+    }
+  }
+
   output.innerHTML = `
-    <div class="slides">
-
-      <h2>📊 Artificial Intelligence Presentation</h2>
-
-      <div class="slide">
-        <h3>Slide 1: What is AI?</h3>
-        <p>Artificial Intelligence is the simulation of human intelligence in machines.</p>
-      </div>
-
-      <div class="slide">
-        <h3>Slide 2: How AI Works</h3>
-        <p>AI learns from data using algorithms, patterns, and training models.</p>
-      </div>
-
-      <div class="slide">
-        <h3>Slide 3: AI in Daily Life</h3>
-        <p>Used in YouTube recommendations, Google Maps, Siri, and self-driving cars.</p>
-      </div>
-
-      <div class="slide">
-        <h3>Slide 4: Advantages & Challenges</h3>
-        <p>AI improves productivity but raises concerns like privacy and job changes.</p>
-      </div>
-
-      <div class="slide">
-        <h3>Slide 5: Future of AI</h3>
-        <p>AI will transform education, healthcare, business, and everyday life.</p>
-      </div>
-
-    </div>
+    <h2>🎉 Presentation Ready</h2>
+    <p><b>Topic:</b> ${topic}</p>
+    <p><b>Audience:</b> ${audience}</p>
+    <p><b>Slides:</b> ${slides}</p>
+    <hr>
+    ${slideContent}
   `;
 }
