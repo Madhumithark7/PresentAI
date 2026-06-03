@@ -1,33 +1,46 @@
 function generatePresentation() {
-  const topic = document.getElementById("topic").value;
-  const audience = document.getElementById("audience").value;
-  const slides = document.getElementById("slides").value;
 
-  const output = document.getElementById("output");
+    const topic = document.getElementById("topic").value;
+    const audience = document.getElementById("audience").value;
+    const slides = document.getElementById("slides").value;
 
-  if (!topic || !audience || !slides) {
-    output.innerHTML = `<p style="color:red;">⚠ Please fill all fields</p>`;
-    return;
-  }
+    const result = document.getElementById("result");
 
-  let slideContent = "";
-
-  for (let i = 1; i <= slides; i++) {
-    if (i == 1) {
-      slideContent += `<div class="slide">📌 Slide ${i}: Introduction to ${topic}</div>`;
-    } else if (i == slides) {
-      slideContent += `<div class="slide">📌 Slide ${i}: Thank You</div>`;
-    } else {
-      slideContent += `<div class="slide">📌 Slide ${i}: About ${topic} for ${audience}</div>`;
+    if (!topic || !audience || !slides) {
+        result.innerHTML = `
+            <div class="slide">⚠ Please fill all fields</div>
+        `;
+        return;
     }
-  }
 
-  output.innerHTML = `
-    <h2>🎉 Presentation Ready</h2>
-    <p><b>Topic:</b> ${topic}</p>
-    <p><b>Audience:</b> ${audience}</p>
-    <p><b>Slides:</b> ${slides}</p>
-    <hr>
-    ${slideContent}
-  `;
+    let output = "";
+
+    for (let i = 1; i <= slides; i++) {
+
+        if (i == 1) {
+            output += `
+                <div class="slide">
+                    📌 Slide ${i}: Introduction to ${topic}
+                </div>
+            `;
+        }
+
+        else if (i == slides) {
+            output += `
+                <div class="slide">
+                    📌 Slide ${i}: Thank You 🎉
+                </div>
+            `;
+        }
+
+        else {
+            output += `
+                <div class="slide">
+                    📌 Slide ${i}: ${topic} for ${audience}
+                </div>
+            `;
+        }
+    }
+
+    result.innerHTML = output;
 }
